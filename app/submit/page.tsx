@@ -1,0 +1,156 @@
+"use client";
+
+import { useActionState } from "react";
+import { initialSubmitState, submitClinicalDocumentAction } from "@/app/actions";
+
+const DOCUMENT_TYPES = [
+  "Referral Request",
+  "Prior Authorization",
+  "Lab Results",
+  "Progress Note",
+  "Other",
+];
+
+export default function SubmitPage() {
+  const [state, formAction, isPending] = useActionState(
+    submitClinicalDocumentAction,
+    initialSubmitState
+  );
+
+  return (
+    <div className="mx-auto max-w-2xl">
+      <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+        Submit Clinical Document
+      </h1>
+      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        This form creates a record in ServiceNow and queues it for AI review.
+      </p>
+
+      <form action={formAction} className="mt-8 flex flex-col gap-5">
+        <Field label="Patient Name" htmlFor="patient_name" required>
+          <input
+            id="patient_name"
+            name="patient_name"
+            type="text"
+            required
+            className={inputClasses}
+          />
+        </Field>
+
+        <Field label="Date of Birth" htmlFor="date_of_birth" required>
+          <input
+            id="date_of_birth"
+            name="date_of_birth"
+            type="date"
+            required
+            className={inputClasses}
+          />
+        </Field>
+
+        <Field label="Provider Name" htmlFor="provider_name" required>
+          <input
+            id="provider_name"
+            name="provider_name"
+            type="text"
+            required
+            className={inputClasses}
+          />
+        </Field>
+
+        <Field label="Document Type" htmlFor="document_type" required>
+          <select
+            id="document_type"
+            name="document_type"
+            required
+            defaultValue=""
+            className={inputClasses}
+          >
+            <option value="" disabled>
+              Select a document type
+            </option>
+            {DOCUMENT_TYPES.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </Field>
+
+        <Field label="Clinical Notes" htmlFor="clinical_notes">
+          <textarea
+            id="clinical_notes"
+            name="clinical_notes"
+            rows={4}
+            className={inputClasses}
+          />
+        </Field>
+
+        <Field label="Medications" htmlFor="medications">
+          <textarea
+            id="medications"
+            name="medications"
+            rows={3}
+            className={inputClasses}
+          />
+        </Field>
+
+        <Field label="Allergies" htmlFor="allergies">
+          <textarea
+            id="allergies"
+            name="allergies"
+            rows={3}
+            className={inputClasses}
+          />
+        </Field>
+
+        <Field label="Upload Document" htmlFor="document">
+          <input
+            id="document"
+            name="document"
+            type="file"
+            className="block w-full text-sm text-zinc-600 file:mr-4 file:rounded-md file:border-0 file:bg-zinc-950 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-zinc-800 dark:text-zinc-400 dark:file:bg-zinc-50 dark:file:text-zinc-950"
+          />
+        </Field>
+
+        {state.status === "error" && (
+          <p className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+            {state.message}
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={isPending}
+          className="mt-2 rounded-full bg-zinc-950 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+        >
+          {isPending ? "Submitting…" : "Submit"}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+const inputClasses =
+  "w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50";
+
+function Field({
+  label,
+  htmlFor,
+  required,
+  children,
+}: {
+  label: string;
+  htmlFor: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={htmlFor} className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+        {label}
+        {required && <span className="text-red-500"> *</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
