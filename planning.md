@@ -1,12 +1,12 @@
 # Clinical Intake Portal
 
-**Target Users**
+**Target Users:**
 Doctor offices
 Clinics
 Referral coordinators
 Medical staff
 
-**Purpose**
+**Purpose:**
 Submit clinical documents into ServiceNow for AI review.
 
 ## Portal Page 1: Submit Clinical Document
@@ -14,28 +14,29 @@ Submit clinical documents into ServiceNow for AI review.
 This is your main page.
 
 **Form Fields**
-Patient Name
-Date of Birth
-Provider Name
-Document Type
-Clinical Notes
-Medications
-Allergies
-Upload Document
+
+- Patient Name
+- Date of Birth
+- Provider Name
+- Document Type
+- Clinical Notes
+- Medications
+- Allergies
+- Upload Document
 
 ---
 
 **When the user clicks Submit:**
 
-Portal
-↓
-POST /submit
-↓
-ServiceNow
-↓
-AI Processing
-↓
-Record Created
+\Portal\
+\↓\
+\POST /submit\
+\↓\
+\ServiceNow\
+\↓\
+\AI Processing\
+\↓\
+\Record Created\
 
 ---
 

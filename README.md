@@ -1,27 +1,29 @@
 # Clinical Intake Portal
 
-**Target Users**
-Doctor offices
-Clinics
-Referral coordinators
-Medical staff
+**Target Users:**
 
-**Purpose**
+- Doctor offices
+- Clinics
+- Referral coordinators
+- Medical staff
+
+**Purpose:**
 Submit clinical documents into ServiceNow for AI review.
 
 ## Tech Stack:
 
-Original Clinical Document Intake:
-ServiceNow (ServiceNow Studio, Record Producer/Catalog Builder, now assist skill kit, now assist document intelligence)
-JavaScript
-REST APIs
+- Original Clinical Document Intake:
+- ServiceNow (ServiceNow Studio, Record Producer/Catalog Builder, now assist skill kit, now assist document intelligence)
+- JavaScript
+- REST APIs
 
 Clinical Intake Portal:
-TypeScript
-next.js
-Tailwind CSS
-ESLint
-App Router
+
+- TypeScript
+- next.js
+- Tailwind CSS
+- ESLint
+- App Router
 
 ## How to run:
 
