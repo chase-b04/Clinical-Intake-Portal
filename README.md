@@ -49,17 +49,20 @@ Clinical Intake Portal:
 
 returns:
 
+```
 {
 "total_documents": 42,
 "pending_review": 8,
 "completed": 27,
 "avg_ai_confidence": 91
 }
+```
 
 ## Project App Structure
 
 Clinical Intake Portal
 
+```
 1. Submit Clinical Document
    └── POST /submit
 2. Intake Dashboard
@@ -69,3 +72,4 @@ Clinical Intake Portal
    └── GET /records/{sys_id}
 4. Admin Review
    └── PATCH /records/{sys_id}
+```

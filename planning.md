@@ -1,10 +1,11 @@
 # Clinical Intake Portal
 
 **Target Users:**
-Doctor offices
-Clinics
-Referral coordinators
-Medical staff
+
+- Doctor offices
+- Clinics
+- Referral coordinators
+- Medical staff
 
 **Purpose:**
 Submit clinical documents into ServiceNow for AI review.
@@ -28,7 +29,8 @@ This is your main page.
 
 **When the user clicks Submit:**
 
-\Portal
+```
+Portal
 ↓
 POST /submit
 ↓
@@ -36,34 +38,40 @@ ServiceNow
 ↓
 AI Processing
 ↓
-Record Created\
+Record Created
+```
 
 ---
 
 This directly maps to your existing table.
 
 Uses:
-**POST /submit**
-**POST /attachments/{sys_id}**
+
+- **POST /submit**
+- **POST /attachments/{sys_id}**
 
 ## Portal Page 2: Intake Dashboard
 
 Uses:
-**GET /records**
-**GET /dashboard-stats**
 
+- **GET /records**
+- **GET /dashboard-stats**
+
+```
 | Patient | Document Type | Status |
 | John Doe | Referral | Complete |
 | Sarah Smith | Prior Auth | Processing |
 | Mike Jones | Lab Results | Review Required |
+```
 
 This immediately shows ServiceNow is the backend system.
 
 **Displays:**
-Total Documents
-Pending Review
-Completed
-Recent Clinical Documents
+
+- Total Documents
+- Pending Review
+- Completed
+- Recent Clinical Documents
 
 ## Portal Page 3: Clinical Document Review
 
@@ -72,17 +80,21 @@ Uses: **GET /records/{sys_id}**
 **Displays:**
 
 _Submitted Information_
-Patient Name
-DOB
-Provider Name
+
+- Patient Name
+- DOB
+- Provider Name
 
 _AI Results_
-AI Summary
-AI Category
-AI Confidence
-Missing Information
+
+- AI Summary
+- AI Category
+- AI Confidence
+- Missing Information
 
 _example_
+
+```
 Summary:
 Patient requesting orthopedic referral due to chronic knee pain.
 
@@ -95,6 +107,7 @@ Confidence:
 Missing Information:
 Insurance Policy Number
 Previous Imaging Reports
+```
 
 ---
 
@@ -105,11 +118,12 @@ This is probably the strongest AI demo you can show.
 Uses: **PATCH /records/{sys_id}**
 
 **Statuses:**
-New
-In Progress
-Pending Review
-Complete
-Rejected
+
+- New
+- In Progress
+- Pending Review
+- Complete
+- Rejected
 
 Shows in list of dropdown form.
 
@@ -126,15 +140,18 @@ That's one of the requirements they're looking for.
 
 returns:
 
+```
 {
 "total_documents": 42,
 "pending_review": 8,
 "completed": 27,
 "avg_ai_confidence": 91
 }
+```
 
 ## Project App Structure
 
+```
 Clinical Intake Portal
 
 1. Submit Clinical Document
@@ -149,9 +166,11 @@ Clinical Intake Portal
 
 4. Admin Review
    └── PATCH /records/{sys_id}
+```
 
 ## Project File Structure
 
+```
 clinical-intake-portal
 │
 ├── app
@@ -172,11 +191,13 @@ clinical-intake-portal
 │
 └── services
 └── servicenow.ts
+```
 
 ## Connecting External App to ServiceNow instance (PDI)
 
 The Next.js app will simply make HTTP requests to the ServiceNow Scripted REST APIs.
 
+```
 Next.js App
 (Localhost:3000)
 ↓
@@ -184,6 +205,7 @@ ServiceNow REST API
 (your-instance.service-now.com)
 ↓
 Clinical Documents Table
+```
 
 **Step 1: Create an Integration User in ServiceNow**
 Create a dedicated user, for example:
@@ -197,10 +219,10 @@ Password:
 
 Give it the roles/ACL access needed to:
 
-Read Clinical Documents
-Create Clinical Documents
-Update Clinical Documents
-Upload Attachments
+- Read Clinical Documents
+- Create Clinical Documents
+- Update Clinical Documents
+- Upload Attachments
 
 This follows the API implementation guide's recommendation to use a dedicated integration user.
 
@@ -217,11 +239,15 @@ https://dev12345.service-now.com/api/x_your_scope/task4
 
 **Step 3: Create an API Service File**
 
+```
 In Next.js:
 services/
 └── servicenow.ts
+```
 
 Example:
+
+```
 const BASE_URL =
 "https://YOUR_INSTANCE.service-now.com/api/x_your_scope/task4";
 
@@ -232,11 +258,12 @@ const auth = btoa(`${USERNAME}:${PASSWORD}`);
 
 export async function getRecords() {
 const response = await fetch(`${BASE_URL}/records`, {
-headers: {
-Authorization: `Basic ${auth}`,
-Accept: "application/json",
-},
+    headers: {
+        Authorization: `Basic ${auth}`,
+        Accept: "application/json",
+    },
 });
+```
 
 return response.json();
 }
@@ -273,13 +300,17 @@ Create a Next.js API route:
 **app/api/records/route.ts**
 
 and proxy requests through Next.js:
+
+```
 Browser
 ↓
 Next.js API Route
 ↓
 ServiceNow
+```
 
 Alternative
-Configure CORS in ServiceNow.
-Possible, but more annoying.
-If this is an intern project, I would absolutely use the Next.js proxy approach.
+
+- Configure CORS in ServiceNow.
+- Possible, but more annoying.
+- If this is an intern project, I would absolutely use the Next.js proxy approach.
