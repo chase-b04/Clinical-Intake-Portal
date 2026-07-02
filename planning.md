@@ -28,15 +28,15 @@ This is your main page.
 
 **When the user clicks Submit:**
 
-\Portal\
-\↓\
-\POST /submit\
-\↓\
-\ServiceNow\
-\↓\
-\AI Processing\
-\↓\
-\Record Created\
+\Portal
+↓
+POST /submit
+↓
+ServiceNow
+↓
+AI Processing
+↓
+Record Created\
 
 ---
 
