@@ -9,7 +9,7 @@ Medical staff
 **Purpose**
 Submit clinical documents into ServiceNow for AI review.
 
-# Portal Page 1: Submit Clinical Document
+## Portal Page 1: Submit Clinical Document
 
 This is your main page.
 
@@ -45,7 +45,7 @@ Uses:
 **POST /submit**
 **POST /attachments/{sys_id}**
 
-# Portal Page 2: Intake Dashboard
+## Portal Page 2: Intake Dashboard
 
 Uses:
 **GET /records**
@@ -64,7 +64,7 @@ Pending Review
 Completed
 Recent Clinical Documents
 
-# Portal Page 3: Clinical Document Review
+## Portal Page 3: Clinical Document Review
 
 Uses: **GET /records/{sys_id}**
 
@@ -99,7 +99,7 @@ Previous Imaging Reports
 
 This is probably the strongest AI demo you can show.
 
-# Portal Page 4: Admin Review
+## Portal Page 4: Admin Review
 
 Uses: **PATCH /records/{sys_id}**
 
@@ -121,7 +121,7 @@ The audience immediately sees:
 
 That's one of the requirements they're looking for.
 
-# NEW API: GET /dashboard-stats
+## NEW API: GET /dashboard-stats
 
 returns:
 
@@ -132,7 +132,7 @@ returns:
 "avg_ai_confidence": 91
 }
 
-# Project App Structure
+## Project App Structure
 
 Clinical Intake Portal
 
@@ -149,7 +149,7 @@ Clinical Intake Portal
 4. Admin Review
    └── PATCH /records/{sys_id}
 
-# Project File Structure
+## Project File Structure
 
 clinical-intake-portal
 │
@@ -172,7 +172,7 @@ clinical-intake-portal
 └── services
 └── servicenow.ts
 
-# Connecting External App to ServiceNow instance (PDI)
+## Connecting External App to ServiceNow instance (PDI)
 
 The Next.js app will simply make HTTP requests to the ServiceNow Scripted REST APIs.
 

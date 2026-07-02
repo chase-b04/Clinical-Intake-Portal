@@ -1,4 +1,4 @@
-## Clinical Intake Portal
+# Clinical Intake Portal
 
 **Target Users**
 Doctor offices
@@ -9,7 +9,7 @@ Medical staff
 **Purpose**
 Submit clinical documents into ServiceNow for AI review.
 
-# Tech Stack:
+## Tech Stack:
 
 Original Clinical Document Intake:
 ServiceNow (ServiceNow Studio, Record Producer/Catalog Builder, now assist skill kit, now assist document intelligence)
@@ -23,13 +23,13 @@ Tailwind CSS
 ESLint
 App Router
 
-# How to run:
+## How to run:
 
 1. Clone the repo
 2. npm run dev
 3. App is available at: http://localhost:3000
 
-# PAGES
+## PAGES
 
 1. Submit Clinical Document
    APIs used: POST /submit & POST /attachments/{sys_id}
@@ -43,7 +43,7 @@ App Router
 4. Admin Review
    APIs used: PATCH /records/{sys_id}
 
-# NEW SEPERATE API: GET /dashboard-stats
+## NEW SEPERATE API: GET /dashboard-stats
 
 returns:
 
@@ -54,7 +54,7 @@ returns:
 "avg_ai_confidence": 91
 }
 
-# Project App Structure
+## Project App Structure
 
 Clinical Intake Portal
 
