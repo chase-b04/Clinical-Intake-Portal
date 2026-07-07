@@ -2,12 +2,9 @@
 // Server Actions, or Route Handlers — never from a "use client" file, since
 // it reads the integration user's credentials from the environment.
 
-export type RecordStatus =
-  | "New"
-  | "In Progress"
-  | "Pending Review"
-  | "Complete"
-  | "Rejected";
+// Must exactly match the `review_status` choice list values on the
+// Clinical Documents table in ServiceNow.
+export type RecordStatus = "pending review" | "reviewed" | "approved" | "rejected";
 
 export interface ClinicalDocumentRecord {
   sys_id: string;
@@ -18,11 +15,10 @@ export interface ClinicalDocumentRecord {
   clinical_notes?: string;
   medications?: string;
   allergies?: string;
-  status: RecordStatus;
-  ai_summary?: string;
+  status: RecordStatus | null;
   ai_category?: string;
   ai_confidence?: number;
-  missing_information?: string[] | string;
+  missing_information?: string;
   sys_created_on?: string;
 }
 
@@ -110,17 +106,23 @@ export async function getDashboardStats(): Promise<DashboardStats> {
   return snFetch<DashboardStats>("/dashboard-stats");
 }
 
+// The /records resource nests the array under `records` (inside the
+// `result` envelope already unwrapped by snFetch): { records: [...] }.
 export async function getRecords(): Promise<ClinicalDocumentRecord[]> {
-  return snFetch<ClinicalDocumentRecord[]>("/records");
+  const data = await snFetch<
+    ClinicalDocumentRecord[] | { records: ClinicalDocumentRecord[] }
+  >("/records");
+  return Array.isArray(data) ? data : (data.records ?? []);
 }
 
 export async function getRecordById(
   sysId: string
 ): Promise<ClinicalDocumentRecord | null> {
   try {
-    return await snFetch<ClinicalDocumentRecord>(
-      `/records/${encodeURIComponent(sysId)}`
-    );
+    const data = await snFetch<
+      ClinicalDocumentRecord | { record: ClinicalDocumentRecord }
+    >(`/records/${encodeURIComponent(sysId)}`);
+    return "record" in data ? data.record : data;
   } catch (error) {
     if (error instanceof Error && error.message.includes("(404 ")) {
       return null;
@@ -154,8 +156,8 @@ export async function uploadAttachment(
 export async function updateRecordStatus(
   sysId: string,
   status: RecordStatus
-): Promise<ClinicalDocumentRecord> {
-  return snFetch<ClinicalDocumentRecord>(
+): Promise<void> {
+  await snFetch<void>(
     `/records/${encodeURIComponent(sysId)}`,
     {
       method: "PATCH",

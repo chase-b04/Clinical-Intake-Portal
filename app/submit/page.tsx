@@ -3,12 +3,18 @@
 import { useActionState } from "react";
 import { initialSubmitState, submitClinicalDocumentAction } from "@/app/actions";
 
+// Must exactly match the `document_type` choice list values on the
+// Clinical Documents table in ServiceNow (case/spacing included) or
+// POST /submit will be rejected. Verify against System Definition >
+// Choice Lists if submissions start failing.
 const DOCUMENT_TYPES = [
-  "Referral Request",
-  "Prior Authorization",
-  "Lab Results",
-  "Progress Note",
-  "Other",
+  "referral",
+  "lab report",
+  "progress note",
+  "discharge summary",
+  "imaging report",
+  "prescription",
+  "consultation note",
 ];
 
 export default function SubmitPage() {
@@ -70,7 +76,7 @@ export default function SubmitPage() {
             </option>
             {DOCUMENT_TYPES.map((type) => (
               <option key={type} value={type}>
-                {type}
+                {type.replace(/\b\w/g, (char) => char.toUpperCase())}
               </option>
             ))}
           </select>
@@ -81,6 +87,7 @@ export default function SubmitPage() {
             id="clinical_notes"
             name="clinical_notes"
             rows={4}
+            maxLength={4000}
             className={inputClasses}
           />
         </Field>
@@ -90,6 +97,7 @@ export default function SubmitPage() {
             id="medications"
             name="medications"
             rows={3}
+            maxLength={4000}
             className={inputClasses}
           />
         </Field>
@@ -99,6 +107,7 @@ export default function SubmitPage() {
             id="allergies"
             name="allergies"
             rows={3}
+            maxLength={1000}
             className={inputClasses}
           />
         </Field>

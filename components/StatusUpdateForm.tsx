@@ -5,19 +5,19 @@ import {
   initialUpdateStatusState,
   updateRecordStatusAction,
 } from "@/app/actions";
+import { formatStatusLabel } from "@/components/DocumentTable";
 import type { RecordStatus } from "@/services/servicenow";
 
 const STATUS_OPTIONS: RecordStatus[] = [
-  "New",
-  "In Progress",
-  "Pending Review",
-  "Complete",
-  "Rejected",
+  "pending review",
+  "reviewed",
+  "approved",
+  "rejected",
 ];
 
 interface StatusUpdateFormProps {
   sysId: string;
-  currentStatus: RecordStatus;
+  currentStatus: RecordStatus | null;
 }
 
 export default function StatusUpdateForm({
@@ -36,12 +36,12 @@ export default function StatusUpdateForm({
         Status
         <select
           name="status"
-          defaultValue={currentStatus}
+          defaultValue={currentStatus ?? STATUS_OPTIONS[0]}
           className="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm text-zinc-950 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
         >
           {STATUS_OPTIONS.map((option) => (
             <option key={option} value={option}>
-              {option}
+              {formatStatusLabel(option)}
             </option>
           ))}
         </select>

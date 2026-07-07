@@ -12,7 +12,8 @@ Submit clinical documents into ServiceNow for AI review.
 
 ## Tech Stack:
 
-- Original Clinical Document Intake:
+Original Clinical Document Intake:
+
 - ServiceNow (ServiceNow Studio, Record Producer/Catalog Builder, now assist skill kit, now assist document intelligence)
 - JavaScript
 - REST APIs

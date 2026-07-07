@@ -2,18 +2,24 @@ import Link from "next/link";
 import type { ClinicalDocumentRecord, RecordStatus } from "@/services/servicenow";
 
 const STATUS_STYLES: Record<RecordStatus, string> = {
-  New: "bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300",
-  "In Progress":
-    "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300",
-  "Pending Review":
+  "pending review":
     "bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-300",
-  Complete:
+  reviewed: "bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300",
+  approved:
     "bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300",
-  Rejected: "bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300",
+  rejected: "bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300",
 };
 
-export function statusBadgeClasses(status: RecordStatus): string {
+export function statusBadgeClasses(status: RecordStatus | null): string {
+  if (!status) {
+    return "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400";
+  }
   return STATUS_STYLES[status] ?? "bg-zinc-100 text-zinc-800";
+}
+
+export function formatStatusLabel(status: RecordStatus | null): string {
+  if (!status) return "Unknown";
+  return status.replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 interface DocumentTableProps {
@@ -65,7 +71,7 @@ export default function DocumentTable({ records }: DocumentTableProps) {
                     record.status
                   )}`}
                 >
-                  {record.status}
+                  {formatStatusLabel(record.status)}
                 </span>
               </td>
             </tr>

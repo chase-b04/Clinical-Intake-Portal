@@ -1,4 +1,5 @@
 import DashboardCards from "@/components/DashboardCards";
+import { formatStatusLabel } from "@/components/DocumentTable";
 import {
   getDashboardStats,
   getRecords,
@@ -70,7 +71,7 @@ export default async function AnalyticsPage() {
     getRecords(),
   ]);
 
-  const byStatus = countBy(records, (record) => record.status);
+  const byStatus = countBy(records, (record) => formatStatusLabel(record.status));
   const byDocumentType = countBy(records, (record) => record.document_type);
 
   return (

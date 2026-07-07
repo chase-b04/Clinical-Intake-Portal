@@ -1,16 +1,13 @@
 import { notFound } from "next/navigation";
-import { statusBadgeClasses } from "@/components/DocumentTable";
+import { formatStatusLabel, statusBadgeClasses } from "@/components/DocumentTable";
 import StatusUpdateForm from "@/components/StatusUpdateForm";
 import { getRecordById } from "@/services/servicenow";
 
 // Always fetch fresh data from ServiceNow; never prerender at build time.
 export const dynamic = "force-dynamic";
 
-function normalizeMissingInformation(
-  value: string[] | string | undefined
-): string[] {
+function normalizeMissingInformation(value: string | undefined): string[] {
   if (!value) return [];
-  if (Array.isArray(value)) return value;
   return value
     .split(/\r?\n|,/)
     .map((item) => item.trim())
@@ -49,7 +46,7 @@ export default async function DocumentReviewPage({
             record.status
           )}`}
         >
-          {record.status}
+          {formatStatusLabel(record.status)}
         </span>
       </div>
 
@@ -69,7 +66,6 @@ export default async function DocumentReviewPage({
           AI Results
         </h2>
         <dl className="mt-4 flex flex-col gap-4">
-          <InfoItem label="Summary" value={record.ai_summary ?? "—"} block />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <InfoItem label="Category" value={record.ai_category ?? "—"} />
             <InfoItem
