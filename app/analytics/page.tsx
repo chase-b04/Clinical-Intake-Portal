@@ -33,27 +33,25 @@ function BreakdownList({
   total: number;
 }) {
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-      <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
-        {title}
-      </h2>
+    <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+      <h2 className="text-lg font-semibold text-zinc-950">{title}</h2>
       <div className="mt-4 flex flex-col gap-3">
         {data.length === 0 && (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">No data yet.</p>
+          <p className="text-sm text-zinc-500">No data yet.</p>
         )}
         {data.map((item) => {
           const percent = total > 0 ? Math.round((item.count / total) * 100) : 0;
           return (
             <div key={item.label}>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-zinc-700 dark:text-zinc-300">{item.label}</span>
-                <span className="text-zinc-500 dark:text-zinc-400">
+                <span className="text-zinc-700">{item.label}</span>
+                <span className="text-zinc-500">
                   {item.count} ({percent}%)
                 </span>
               </div>
-              <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+              <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-zinc-100">
                 <div
-                  className="h-full rounded-full bg-zinc-950 dark:bg-zinc-50"
+                  className="h-full rounded-full bg-lime-400"
                   style={{ width: `${percent}%` }}
                 />
               </div>
@@ -77,10 +75,11 @@ export default async function AnalyticsPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+        <p className="text-sm font-medium text-lime-600">Insights</p>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-950">
           Analytics
         </h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-zinc-600">
           Aggregate trends across all clinical documents processed by ServiceNow AI.
         </p>
       </div>

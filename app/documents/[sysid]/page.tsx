@@ -31,15 +31,14 @@ export default async function DocumentReviewPage({
   );
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-start justify-between gap-4 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+          <p className="text-sm font-medium text-lime-600">Document Review</p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-950">
             {record.patient_name}
           </h1>
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-            {record.document_type}
-          </p>
+          <p className="mt-1 text-sm text-zinc-500">{record.document_type}</p>
         </div>
         <span
           className={`inline-flex h-fit rounded-full px-3 py-1 text-sm font-medium ${statusBadgeClasses(
@@ -50,8 +49,8 @@ export default async function DocumentReviewPage({
         </span>
       </div>
 
-      <section className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-        <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
+      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-zinc-950">
           Submitted Information
         </h2>
         <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -61,10 +60,8 @@ export default async function DocumentReviewPage({
         </dl>
       </section>
 
-      <section className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-        <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
-          AI Results
-        </h2>
+      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-zinc-950">AI Results</h2>
         <dl className="mt-4 flex flex-col gap-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <InfoItem label="Category" value={record.ai_category ?? "—"} />
@@ -76,31 +73,27 @@ export default async function DocumentReviewPage({
             />
           </div>
           <div>
-            <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            <dt className="text-sm font-medium text-zinc-500">
               Missing Information
             </dt>
             <dd className="mt-1">
               {missingInformation.length > 0 ? (
-                <ul className="list-inside list-disc text-sm text-zinc-950 dark:text-zinc-50">
+                <ul className="list-inside list-disc text-sm text-zinc-950">
                   {missingInformation.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
               ) : (
-                <span className="text-sm text-zinc-950 dark:text-zinc-50">
-                  None
-                </span>
+                <span className="text-sm text-zinc-950">None</span>
               )}
             </dd>
           </div>
         </dl>
       </section>
 
-      <section className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-        <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
-          Admin Review
-        </h2>
-        <p className="mt-1 mb-4 text-sm text-zinc-500 dark:text-zinc-400">
+      <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-zinc-950">Admin Review</h2>
+        <p className="mt-1 mb-4 text-sm text-zinc-500">
           Update this record&apos;s status directly. This writes back to
           ServiceNow through the portal&apos;s API.
         </p>
@@ -121,10 +114,8 @@ function InfoItem({
 }) {
   return (
     <div className={block ? "col-span-full" : undefined}>
-      <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-        {label}
-      </dt>
-      <dd className="mt-1 text-sm text-zinc-950 dark:text-zinc-50">{value}</dd>
+      <dt className="text-sm font-medium text-zinc-500">{label}</dt>
+      <dd className="mt-1 text-sm text-zinc-950">{value}</dd>
     </div>
   );
 }

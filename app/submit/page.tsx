@@ -24,11 +24,11 @@ export default function SubmitPage() {
   );
 
   return (
-    <div className="mx-auto max-w-2xl">
-      <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+    <div className="mx-auto max-w-2xl rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm">
+      <h1 className="text-2xl font-semibold tracking-tight text-zinc-950">
         Submit Clinical Document
       </h1>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="mt-2 text-sm text-zinc-600">
         This form creates a record in ServiceNow and queues it for AI review.
       </p>
 
@@ -117,12 +117,12 @@ export default function SubmitPage() {
             id="document"
             name="document"
             type="file"
-            className="block w-full text-sm text-zinc-600 file:mr-4 file:rounded-md file:border-0 file:bg-zinc-950 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-zinc-800 dark:text-zinc-400 dark:file:bg-zinc-50 dark:file:text-zinc-950"
+            className="block w-full text-sm text-zinc-600 file:mr-4 file:rounded-full file:border-0 file:bg-zinc-950 file:px-4 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-zinc-800"
           />
         </Field>
 
         {state.status === "error" && (
-          <p className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
+          <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
             {state.message}
           </p>
         )}
@@ -130,7 +130,7 @@ export default function SubmitPage() {
         <button
           type="submit"
           disabled={isPending}
-          className="mt-2 rounded-full bg-zinc-950 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+          className="mt-2 rounded-full bg-zinc-950 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-50"
         >
           {isPending ? "Submitting…" : "Submit"}
         </button>
@@ -140,7 +140,7 @@ export default function SubmitPage() {
 }
 
 const inputClasses =
-  "w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50";
+  "w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 focus:border-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-200";
 
 function Field({
   label,
@@ -155,7 +155,7 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+      <label htmlFor={htmlFor} className="text-sm font-medium text-zinc-700">
         {label}
         {required && <span className="text-red-500"> *</span>}
       </label>

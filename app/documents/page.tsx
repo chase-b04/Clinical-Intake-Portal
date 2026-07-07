@@ -14,10 +14,11 @@ export default async function DocumentsPage() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+        <p className="text-sm font-medium text-lime-600">Overview</p>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-950">
           Intake Dashboard
         </h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-zinc-600">
           Live status of clinical documents submitted for AI review.
         </p>
       </div>
@@ -25,7 +26,7 @@ export default async function DocumentsPage() {
       <DashboardCards stats={stats} />
 
       <div>
-        <h2 className="mb-4 text-lg font-semibold text-zinc-950 dark:text-zinc-50">
+        <h2 className="mb-4 text-lg font-semibold text-zinc-950">
           Recent Clinical Documents
         </h2>
         <DocumentTable records={records} />
