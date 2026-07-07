@@ -2,8 +2,8 @@
 
 import { useActionState } from "react";
 import {
-  initialUpdateStatusState,
   updateRecordStatusAction,
+  type UpdateStatusState,
 } from "@/app/actions";
 import { formatStatusLabel } from "@/components/DocumentTable";
 import type { RecordStatus } from "@/services/servicenow";
@@ -14,6 +14,8 @@ const STATUS_OPTIONS: RecordStatus[] = [
   "approved",
   "rejected",
 ];
+
+const initialUpdateStatusState: UpdateStatusState = { status: "idle" };
 
 interface StatusUpdateFormProps {
   sysId: string;

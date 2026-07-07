@@ -1,7 +1,9 @@
 "use client";
 
 import { useActionState } from "react";
-import { initialSubmitState, submitClinicalDocumentAction } from "@/app/actions";
+import { submitClinicalDocumentAction, type SubmitState } from "@/app/actions";
+
+const initialSubmitState: SubmitState = { status: "idle" };
 
 // Must exactly match the `document_type` choice list values on the
 // Clinical Documents table in ServiceNow (case/spacing included) or

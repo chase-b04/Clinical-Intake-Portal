@@ -14,8 +14,6 @@ export interface SubmitState {
   message?: string;
 }
 
-export const initialSubmitState: SubmitState = { status: "idle" };
-
 export async function submitClinicalDocumentAction(
   _prevState: SubmitState,
   formData: FormData
@@ -71,8 +69,6 @@ export interface UpdateStatusState {
   status: "idle" | "success" | "error";
   message?: string;
 }
-
-export const initialUpdateStatusState: UpdateStatusState = { status: "idle" };
 
 export async function updateRecordStatusAction(
   _prevState: UpdateStatusState,
