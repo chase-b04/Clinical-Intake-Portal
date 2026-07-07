@@ -3,6 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+function LogoIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <rect x="6" y="4" width="12" height="16" rx="2" />
+      <path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1" />
+      <path d="M9 12l2 2 4-4" />
+    </svg>
+  );
+}
+
 function HomeIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -57,8 +67,8 @@ export default function Navbar() {
     <aside className="flex w-64 shrink-0 flex-col justify-between bg-zinc-950 p-6">
       <div>
         <Link href="/" className="flex items-center gap-2 px-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-lime-300 text-sm font-bold text-zinc-950">
-            +
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-lime-300 text-zinc-950">
+            <LogoIcon className="h-4 w-4" />
           </span>
           <span className="text-base font-semibold tracking-tight text-white">
             Clinical Intake Portal
