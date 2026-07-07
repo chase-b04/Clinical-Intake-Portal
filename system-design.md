@@ -1,3 +1,4 @@
+```
                 Healthcare Staff
                         │
                         ▼
@@ -15,3 +16,5 @@
  Clinical Documents Table      AI Processing
                                    (Now Assist /
                                Document Intelligence)
+
+```
